@@ -4,6 +4,4 @@ comment1.params=
 comment1.target=MyMayflower()
 comment2.params=
 comment2.target=void\ init()
-comment3.params=w
-comment3.target=void\ changeWorld(mayflower.World)
-numComments=4
+numComments=3
