@@ -17,8 +17,8 @@ public class MyWorld extends World {
         // dog = new Dog();
         // addObject(dog, 200, 122);
 
-        jack = new Jack();
-        addObject(jack, 80, 70);
+        //jack = new Jack();
+        //addObject(jack, 80, 70);
 
         //ninja = new Ninja();
         //addObject(ninja, 320, 86);
@@ -36,20 +36,20 @@ public class MyWorld extends World {
             MyMayflower.changeWorld(new YouLose());
         }
     }
+
     private void initializeGround()
     {
-                for(int i = 0; i < tiles.length; i++)
+        for(int i = 0; i < tiles.length; i++)
             for(int j = 0; j < tiles[0].length; j++)
                 tiles[i][j]="";
-                
-                        for(int i = 0; i < tiles[0].length; i++)
+
+        for(int i = 0; i < tiles[0].length; i++)
             tiles[5][i]+="ground";
     }
 
     private void addYarn()
     {
 
-                
         if (level == 1)
             for (int r = 0; r < tiles.length; r++)
             {
@@ -109,9 +109,6 @@ public class MyWorld extends World {
 
     public void buildWorld()
     {  
-
-
-
 
         for (int r = 0; r < tiles.length; r++)
         {
