@@ -74,7 +74,7 @@ public class Cat extends MovableAnimatedActor
         setWalkLeftAnimation(walkLeft);
     }
     public int getScore(){ return score;}
-    public int getLives(){return lives;}
+    public int getLive(){return lives;}
     private void updateText()
     {
         World w = getWorld();

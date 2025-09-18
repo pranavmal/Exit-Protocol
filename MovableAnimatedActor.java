@@ -87,7 +87,7 @@ public class MovableAnimatedActor extends AnimatedActor{
                 setAnimation(idleLeft);
             currentAction = newAction;
         }
-
+        
         super.act();
     }
 
