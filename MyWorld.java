@@ -6,13 +6,14 @@ public class MyWorld extends World {
     private Dog dog;    
     private Jack jack;
     private Ninja ninja;
-        private String[][] tiles;
+    private int level;
+    private String[][] tiles;
     public MyWorld(){
         setBackground("img/BG/BG.png");
+        level = 1;
         cat = new Cat();
         addObject(cat,400, 10);
-        
-     
+
         // dog = new Dog();
         // addObject(dog, 200, 122);
 
@@ -22,31 +23,76 @@ public class MyWorld extends World {
         //ninja = new Ninja();
         //addObject(ninja, 320, 86);
         tiles = new String[6][8];
+        initializeGround();
+        addYarn();
         buildWorld();
-        
+
     }
-    
-    public void act(){
-        if (cat.getLives() == 0) {
+
+    public void act()
+    {
+        if (cat.getLives() == 0)
+        {
             MyMayflower.changeWorld(new YouLose());
         }
     }
-    
-    public void addRandomObjects()
+    private void initializeGround()
     {
-        int rand=0;
-        for(int i = 0; i < tiles.length; i++)
-            for(int j = 0; j < tiles[0].length-3; j++)
+                for(int i = 0; i < tiles.length; i++)
+            for(int j = 0; j < tiles[0].length; j++)
+                tiles[i][j]="";
+                
+                        for(int i = 0; i < tiles[0].length; i++)
+            tiles[5][i]+="ground";
+    }
+
+    private void addYarn()
+    {
+
+                
+        if (level == 1)
+            for (int r = 0; r < tiles.length; r++)
             {
-                rand= (int)(Math.random()*9);
-                if(rand<3)
+                for (int c = 0; c < tiles[r].length; c++)
                 {
-                    if(tiles[i][j]==""){
-                        tiles[i][j]+="yarn";
-                        //addObject(new Yarn(), i*128,j*94);
+                    int rand = 0;
+                    rand = (int) (Math.random() * 9) + 1;
+                    if (rand <= 2 && tiles[r][c].equals(""))
+                    {
+                        tiles[r][c] = "Yarn";
                     }
                 }
             }
+        else if (level == 2)
+        {
+            for (int r = 0; r < tiles.length; r++)
+            {
+                for (int c = 0; c < tiles[r].length; c++)
+                {
+                    int rand = 0;
+                    rand = (int) (Math.random() * 9) + 1;
+                    if (rand <= 3 && tiles[r][c].equals(""))
+                    {
+                        tiles[r][c] = "Yarn";
+                    }
+                }
+            }
+        }
+        else if (level == 3)
+        {
+            for (int r = 0; r < tiles.length; r++)
+            {
+                for (int c = 0; c < tiles[r].length; c++)
+                {
+                    int rand = 0;
+                    rand = (int) (Math.random() * 9) + 1;
+                    if (rand <= 4 && tiles[r][c].equals(""))
+                    {
+                        tiles[r][c] = "Yarn";
+                    }
+                }
+            }
+        }
         //boolean added = false;
         //  int row;
         //int col;
@@ -60,19 +106,23 @@ public class MyWorld extends World {
         added=true;
         }*/
     }
+
     public void buildWorld()
     {  
-        for(int i = 0; i < tiles.length; i++)
-            for(int j = 0; j < tiles[0].length; j++)
-                tiles[i][j]="";
 
-        for(int i = 0; i < tiles[0].length; i++)
-            tiles[5][i]+="ground";
 
-        for(int i = 0; i < tiles.length; i++)
-            for(int j = 0; j < tiles[0].length; j++)
-                if(tiles[i][j].equals("ground"))
-                    addObject (new Block(), j*128, i*95);
 
+
+        for (int r = 0; r < tiles.length; r++)
+        {
+            for (int c = 0; c < tiles[r].length; c++)
+            {
+                if(tiles[r][c].equals("ground"))
+                    addObject (new Block(), c*128, r*95);
+                if (tiles[r][c].equals("Yarn"))
+                    addObject(new Yarn(), c * 128, r * 95);
+
+            }
+        }
     }
 }
