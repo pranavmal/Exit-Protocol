@@ -13,6 +13,7 @@ public class MovableAnimatedActor extends AnimatedActor{
     private boolean isFalling;
     private boolean isJumping;
     private boolean isBlocking;
+    private boolean catTouchingLadder;
     public MovableAnimatedActor(){
         walkRight = null;
         direction = "right";
@@ -21,6 +22,11 @@ public class MovableAnimatedActor extends AnimatedActor{
         falling = null;
         fleft = null;
         currentAction = null;
+        catTouchingLadder = false;
+    }
+    
+    public void setTouchingLadder(boolean value) {
+        catTouchingLadder = value;
     }
 
     public void act(){
@@ -34,8 +40,9 @@ public class MovableAnimatedActor extends AnimatedActor{
             if(!isFalling||isJumping){
                 for(int i =10 ; i>0; i-=2)
                 {
-                    if (getY()-i > 0) {
+                    if (getY()-i > 0 && !catTouchingLadder) {
                         setLocation(getX(), getY()-i);
+                        System.out.println("R");
                     }
                 }
             }
@@ -46,18 +53,18 @@ public class MovableAnimatedActor extends AnimatedActor{
             direction="right";
 
             if(isBlocked()){
-                setLocation(getX()-1, getY());
+                setLocation(getX()-2, getY());
             }
             else
-                setLocation(getX()+1, getY());
+                setLocation(getX()+2, getY());
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_LEFT)&& getX()>0)
         {
             newAction = "walkLeft";
             direction="left";
-            setLocation(getX()-1, getY());       
+            setLocation(getX()-2, getY());       
             if(isBlocked()){                
-                setLocation(getX()+1, getY());
+                setLocation(getX()+2, getY());
             }
         }
         else if((direction!=null) && !direction.equals("left"))
