@@ -74,7 +74,7 @@ public class Cat extends MovableAnimatedActor
         setWalkLeftAnimation(walkLeft);
     }
     public int getScore(){ return score;}
-    public int getLive(){return lives;}
+    public int getLives(){return lives;}
     private void updateText()
     {
         World w = getWorld();
@@ -99,6 +99,12 @@ public class Cat extends MovableAnimatedActor
          World wo = getWorld();
          wo.removeObject(this);
          setLocation(400,300);
+        }
+        
+        if (isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+            for (int x = 0; x <= 20; x++) {
+                setLocation(getX(), getY()-6);
+            }
         }
     }
 }
