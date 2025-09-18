@@ -1,4 +1,5 @@
 import mayflower.*;
+import java.util.ArrayList;
 public class Cat extends MovableAnimatedActor
 {
     private Animation walkRight;
@@ -16,9 +17,11 @@ public class Cat extends MovableAnimatedActor
     private int x;
     private int score;
     private int lives;
+    private ArrayList<Heart> set;
     public Cat() 
     {
         x = 0;
+        set = new ArrayList<Heart>();
         score = 0;
         lives = 3;
         walkRightFrames = new String[10];
@@ -80,6 +83,10 @@ public class Cat extends MovableAnimatedActor
         World w = getWorld();
         w.removeText(10,30);
         w.showText("Score: " + score + " lives: " + lives, 10, 30, Color.BLACK);
+        for (int i = 0; i < lives; i--) {
+            set.add(new Heart());
+            w.addObject(set.get(i), 50*(i+1), 50);
+        }
     }
     public void increaseScore(int amount)
     {
@@ -101,9 +108,12 @@ public class Cat extends MovableAnimatedActor
          setLocation(400,300);
         }
         
+        // System.out.println("Touching ladder: " + isTouching(Ladder.class) + " Key Up: " + Mayflower.isKeyDown(Keyboard.KEY_UP));
+        super.setTouchingLadder(isTouching(Ladder.class));
         if (isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
             for (int x = 0; x <= 20; x++) {
-                setLocation(getX(), getY()-6);
+                setLocation(getX(), getY()-1.1);
+                System.out.println("running");
             }
         }
     }
