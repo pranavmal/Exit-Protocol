@@ -20,6 +20,8 @@ public class MyWorld extends World {
         cat = new Cat();
         addObject(cat,400, 10);
         
+        level = 1;
+        
      
         // dog = new Dog();
         // addObject(dog, 200, 122);
