@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=Jack
+comment0.target=LayerBlock
 comment1.params=
-comment1.target=Jack()
+comment1.target=LayerBlock()
 comment2.params=
 comment2.target=void\ act()
 numComments=3

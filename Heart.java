@@ -6,7 +6,7 @@ public class Heart extends Actor
     public Heart()
     {
         
-        setImage("img/Object/Heart.png");
+        setImage("img/Object/Heart.jpg");
         
     }
 

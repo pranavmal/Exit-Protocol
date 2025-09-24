@@ -2,8 +2,10 @@
 comment0.target=MyWorld
 comment1.params=
 comment1.target=MyWorld()
-comment2.params=
-comment2.target=void\ act()
+comment2.params=l\ x\ y
+comment2.target=void\ addLadder(Ladder,\ int,\ int)
 comment3.params=
-comment3.target=void\ buildWorld()
-numComments=4
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ buildWorld()
+numComments=5

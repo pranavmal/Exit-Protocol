@@ -1,4 +1,5 @@
 import mayflower.*;
+import java.util.*;
 
 public class MyWorld extends World {
     private Cat cat;
@@ -7,9 +8,13 @@ public class MyWorld extends World {
     private Jack jack;
     private Ninja ninja;
     private Ladder l1;
-    
-        private String[][] tiles;
+    private ArrayList<Integer> ladderX;
+    private ArrayList<Integer> ladderY;
+    private String[][] tiles;
     public MyWorld(){
+        ladderX = new ArrayList<Integer>();
+        ladderY = new ArrayList<Integer>();
+        
         setBackground("img/BG/BG.png");
         cat = new Cat();
         addObject(cat,400, 10);
@@ -28,7 +33,15 @@ public class MyWorld extends World {
         
         
         l1 = new Ladder();
-        addObject(l1, 256, 325);
+        addLadder(l1, 256, 325);
+        
+        addObject(new LayerBlock(), 430, 120);
+    }
+    
+    private void addLadder(Ladder l, int x, int y) {
+        addObject(l, x, y);
+        ladderX.add(x);
+        ladderY.add(y);
     }
     
     public void act(){
