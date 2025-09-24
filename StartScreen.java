@@ -17,7 +17,7 @@ public class StartScreen extends World
     {
         if (Mayflower.isKeyDown(Keyboard.KEY_SPACE))
         {
-            MyMayflower.changeWorld(new MyWorld());
+            MyMayflower.changeWorld(new Level1());
         }
     }
 }
