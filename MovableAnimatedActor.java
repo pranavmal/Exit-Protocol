@@ -14,7 +14,11 @@ public class MovableAnimatedActor extends AnimatedActor{
     private boolean isJumping;
     private boolean isBlocking;
     private boolean catTouchingLadder;
+    private boolean catTouchingLayerBlock;
+    private Timer jumpTimer;
+    private int yVelocity;
     public MovableAnimatedActor(){
+        jumpTimer = new Timer(100000000);
         walkRight = null;
         direction = "right";
         walkLeft = null;
@@ -28,24 +32,41 @@ public class MovableAnimatedActor extends AnimatedActor{
     public void setTouchingLadder(boolean value) {
         catTouchingLadder = value;
     }
-
+    
+    public void doSomething(int x, int y) {
+        setLocation(x, y);
+    }
+    
     public void act(){
+        catTouchingLayerBlock = getTouchingLayerBlock();
         String newAction = null;
         if(currentAction == null)
+        {
             newAction = "idleRight";
-
-        if(Mayflower.isKeyDown(Keyboard.KEY_UP))
+        }
+        
+        // System.out.println(catTouchingLayerBlock);
+        
+        if(jumpTimer.isDone() && Mayflower.isKeyDown(Keyboard.KEY_UP))
         {
 
-            if(!isFalling||isJumping){
-                for(int i =10 ; i>0; i-=2)
+            if((!isFalling||isJumping)){
+                
+                for(int i =11*getStep() ; i>0; i-=1)
                 {
-                    if (getY()-i > 0 && !catTouchingLadder) {
-                        setLocation(getX(), getY()-i);
-                        System.out.println("R");
+                    if (getY()-(int)1.1*getStep() > 0 && !catTouchingLadder) {
+                        int x = getX();
+                        int y = getY();
+                        doSomething(x, y - (int) 1.1*getStep());
+                        
+                        if (isTouching(LayerBlock.class)) {
+                            setLocation(x, y + (int) 1.1*getStep());
+                            // break;
+                        }
                     }
                 }
             }
+            jumpTimer.reset();
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_RIGHT)&& getX()+getWidth()<800)
         {

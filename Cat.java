@@ -17,11 +17,13 @@ public class Cat extends MovableAnimatedActor
     private int x;
     private int score;
     private int lives;
-    private ArrayList<Heart> set;
+    private ArrayList<Heart> hearts;
+    private Timer climbTimer;
     public Cat() 
     {
         x = 0;
-        set = new ArrayList<Heart>();
+        hearts = new ArrayList<Heart>();
+        climbTimer = new Timer(1000000);
         score = 0;
         lives = 3;
         walkRightFrames = new String[10];
@@ -83,10 +85,16 @@ public class Cat extends MovableAnimatedActor
         World w = getWorld();
         w.removeText(10,30);
         w.showText("Score: " + score + " lives: " + lives, 10, 30, Color.BLACK);
-        for (int i = 0; i < lives; i--) {
-            set.add(new Heart());
-            w.addObject(set.get(i), 50*(i+1), 50);
+        for (int j = hearts.size() - 1; j > 0; j--) {
+                w.removeObject(hearts.get(j));
+            }
+        for (int i = 0; i < lives; i++) {
+            
+            hearts.add(new Heart());
+            
+            w.addObject(hearts.get(i), 50*(i+1), 50);
         }
+        
     }
     public void increaseScore(int amount)
     {
@@ -97,24 +105,27 @@ public class Cat extends MovableAnimatedActor
         lives -= amount1;
         setLocation(400,300);
     }
+    
     public void act()
     {
         super.act();
         updateText();
+        World wo = getWorld();
+        
         if(lives == 0)
         {
-         World wo = getWorld();
          wo.removeObject(this);
          setLocation(400,300);
         }
         
         // System.out.println("Touching ladder: " + isTouching(Ladder.class) + " Key Up: " + Mayflower.isKeyDown(Keyboard.KEY_UP));
         super.setTouchingLadder(isTouching(Ladder.class));
-        if (isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-            for (int x = 0; x <= 20; x++) {
-                setLocation(getX(), getY()-1.1);
-                System.out.println("running");
-            }
+        super.setTouchingLayerBlock(isTouching(LayerBlock.class));
+        
+        while (climbTimer.isDone() && isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+            climbTimer.reset();
+            setLocation(getX(), getY() - 1.1*getStep());
+            System.out.println("Going up by one");
         }
     }
 }
