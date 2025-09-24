@@ -12,14 +12,14 @@ public class Level1 extends World
     private int level;
     private String[][] tiles;
     private Jack jack;
-
+    private int screenIndex;
     /**
      * Constructor for objects of class Level1
      */
     public Level1()
     {
         setBackground("img/BG/BG.png");
-
+        screenIndex = 0;
         cat = new Cat();
         addObject(cat,400, 10);
         
@@ -39,9 +39,41 @@ public class Level1 extends World
         {
             MyMayflower.changeWorld(new YouLose());
         }
-
+        if(cat.getY()-10 <= 0)
+        {
+            nextScreen();
+        }
     }
-    
+    public void nextScreen()
+    {
+        // screenIndex++;
+        // if(screenIndex == 1)
+        // {
+            // cat.setLocation(400,100);
+            // jack.setLocation(100, 100);
+            // initializeCourse();
+            // addYarn();
+            // buildWorld();
+        // }
+        // else if(screenIndex == 2)
+        // {
+             // cat.setLocation(400,200);
+            // jack.setLocation(200,100);
+            // initializeCourse();
+            // addYarn();
+            // buildWorld();
+            // level = 2;
+        // }
+        // else if(level == 2)
+        // {
+            // MyMayflower.changeWorld(new Level2());
+        // }
+        if (cat.getScore() == getNumYarn(tiles))
+        {
+            MyMayflower.changeWorld(new Level2());
+        }
+        
+    }
     private void initializeCourse()
     {
         for(int i = 0; i < tiles.length; i++)
@@ -66,6 +98,22 @@ public class Level1 extends World
                 }
             }
         }
+    }
+    
+    public int getNumYarn(String[][] arr)
+    {
+        int counter = 0;
+        for (int r = 0; r < arr.length; r++)
+        {
+            for (int c = 0; c < arr[r].length; c++)
+            {
+                if (arr[r][c].equals("Yarn"))
+                {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
     public void buildWorld()

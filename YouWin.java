@@ -8,6 +8,11 @@ public class YouWin extends World
         setBackground("img/BG/YouWin.png");
     }
     
-    public void act() {
+    public void act() 
+    {
+        if (Mayflower.isKeyDown(Keyboard.KEY_SPACE))
+            {
+                MyMayflower.changeWorld(new StartScreen());
+            }
     }
 }

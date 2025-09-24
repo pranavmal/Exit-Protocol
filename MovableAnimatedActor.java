@@ -27,19 +27,23 @@ public class MovableAnimatedActor extends AnimatedActor{
         String newAction = null;
         if(currentAction == null)
             newAction = "idleRight";
-
-        if(Mayflower.isKeyDown(Keyboard.KEY_UP))
+        if(isTouching(Block.class))
         {
-
-            if(!isFalling||isJumping){
-                for(int i =10 ; i>0; i-=2)
+            
+        }
+        if((Mayflower.isKeyDown(Keyboard.KEY_UP)))
+        {
+            isJumping = true;
+            if(isFalling == false && isJumping == true)
+            {
+                 for(int i =10 ; i>0; i-=2)
                 {
                     if (getY()-i > 0) {
                         setLocation(getX(), getY()-i);
                     }
-                }
+                }   
             }
-        }
+                    }
         else if(Mayflower.isKeyDown(Keyboard.KEY_RIGHT)&& getX()+getWidth()<800)
         {
             newAction = "walkRight";

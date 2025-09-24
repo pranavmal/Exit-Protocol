@@ -1,10 +1,19 @@
 #BlueJ class context
 comment0.target=Level3
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Level3\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Level1\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Level3()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Level3\r\n
-comment2.params=y
-comment2.target=int\ sampleMethod(int)
-comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
-numComments=3
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Level1\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ nextScreen()
+comment4.params=
+comment4.target=void\ initializeCourse()
+comment5.params=
+comment5.target=void\ addYarn()
+comment6.params=arr
+comment6.target=int\ getNumYarn(java.lang.String[][])
+comment7.params=
+comment7.target=void\ buildWorld()
+numComments=8

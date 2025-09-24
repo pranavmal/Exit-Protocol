@@ -16,6 +16,7 @@ public class Cat extends MovableAnimatedActor
     private int x;
     private int score;
     private int lives;
+    
     public Cat() 
     {
         x = 0;
