@@ -127,5 +127,10 @@ public class Cat extends MovableAnimatedActor
             setLocation(getX(), getY() - 1.1*getStep());
             System.out.println("Going up by one");
         }
+        
+        if (isTouching(Spike.class)) {
+            decreaseLives(1);
+            setLocation(250, 70);
+        }
     }
 }

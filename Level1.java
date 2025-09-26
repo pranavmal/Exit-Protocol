@@ -1,21 +1,14 @@
 import mayflower.*;
-/**
- * Write a description of class Level1 here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Level1 extends World
 {
-    // instance variables - replace the example below with your own
     private Cat cat;
     private int level;
     private String[][] tiles;
     private Jack jack;
     private int screenIndex;
-    /**
-     * Constructor for objects of class Level1
-     */
+    private Spike spike;
+
     public Level1()
     {
         setBackground("img/BG/BG.png");
@@ -31,6 +24,9 @@ public class Level1 extends World
         initializeCourse();
         addYarn();
         buildWorld();
+        spike = new Spike();
+        addObject(spike, 450, 450);
+        
     }
     
     public void act()
@@ -51,14 +47,20 @@ public class Level1 extends World
         {
             cat.setLocation(400,100);
             jack.setLocation(100, 100);
-            initializeCourse();
+            spike.setLocation(450,450);
+            removeObject(spike);
+            addObject(spike, 350 , 250);
+            
             addYarn();
             buildWorld();
+            
+            
         }
         else if(screenIndex == 2)
         {
              cat.setLocation(400,200);
             jack.setLocation(200,100);
+            spike.setLocation(450,450);
             initializeCourse();
             addYarn();
             buildWorld();
