@@ -2,15 +2,9 @@ import mayflower.*;
 
 public class StartScreen extends World
 {
-    // instance variables - replace the example below with your own
-    
-
-    /**
-     * Constructor for objects of class StartScreen
-     */
     public StartScreen()
     {
-        setBackground("img/BG/TitleScreen.png");
+        setBackground("img/BG/start.png");
     }
 
     public void act()

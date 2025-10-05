@@ -1,33 +1,40 @@
 import mayflower.*;
-/**
- * Write a description of class Level1 here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Level2 extends World
 {
-    // instance variables - replace the example below with your own
-    private Cat cat;
-    private int level;
+    private Axion axion;
     private String[][] tiles;
-    private Jack jack;
-    private int screenIndex;
-    /**
-     * Constructor for objects of class Level1
-     */
+    private Ghost ghost1;
+    private Ghost ghost2;
+    private Island island2;
+    private Ladder ladder1;
+    private Island island1;
+    private Ladder ladder3;
+    private Ladder ladder2;
+
     public Level2()
     {
-        setBackground("img/BG/BG2.png");
-        screenIndex = 0;
-        cat = new Cat();
-        addObject(cat,400, 10);
+        setBackground("img/BG/level2.png");
+        axion = new Axion();
+        addObject(axion,30, 350);
+
+        island1 = new Island();
+        island2 = new Island();
+        ladder1 = new Ladder();
+        ladder3 = new Ladder();
+        ladder2 = new Ladder();
+        addObject(ladder1, 240,290);
+        addObject(ladder3 , 720, 0);
+        addObject(ladder2 , 520,110);
+        addObject(island2, 585, 120);
+        addObject(island1, 300, 300);
         
-        jack = new Jack();
-        addObject(jack, 80, 70);
+        ghost1 = new Ghost();
+        addObject(ghost1, 315, 200);
+        ghost2 = new Ghost();
+        addObject(ghost2, 600, 20);
         
         tiles = new String[6][8];
-        level = 0;
         initializeCourse();
         addYarn();
         buildWorld();
@@ -35,11 +42,11 @@ public class Level2 extends World
     
     public void act()
     {
-        if (cat.getLives() == 0)
+        if (axion.getLives() == 0)
         {
             MyMayflower.changeWorld(new YouLose());
         }
-        if(cat.getY()-10 <= 0)
+        if(axion.getY()-10 <= 0)
         {
             MyMayflower.changeWorld(new Level3());
         }

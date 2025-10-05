@@ -6,13 +6,13 @@ public class GravityActor extends Actor
     private boolean catTouchingLayerBlock;
     public GravityActor()
     {
-        step = 3;
+        step = 2;
     }
-    
+
     public void setTouchingLayerBlock(boolean value) {
         catTouchingLayerBlock = value;
     }
-    
+
     public boolean getTouchingLayerBlock() {
         return catTouchingLayerBlock;
     }
@@ -25,14 +25,14 @@ public class GravityActor extends Actor
             setLocation(getX(),getY()-step);
         }
     }
-    
+
     public int getStep() {
         return step;
     }
 
     public boolean isBlocked()
     {
-        if(isTouching(Block.class) || isTouching(LayerBlock.class))
+        if(isTouching(Block.class) || isTouching(LayerBlock.class) || isTouching(Island.class))
         {
             return true;
         }
@@ -43,7 +43,7 @@ public class GravityActor extends Actor
     {
         boolean ret;
         setLocation(getX(), getY()+step);
-        ret = isTouching(Block.class) || isTouching(LayerBlock.class);
+        ret = isTouching(Block.class) || isTouching(LayerBlock.class) || isTouching(Island.class);
         setLocation(getX(), getY() - step);
         return !ret;
     }

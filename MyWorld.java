@@ -2,7 +2,7 @@ import mayflower.*;
 import java.util.*;
 
 public class MyWorld extends World {
-    private Cat cat;
+    private Axion axion;
     private Block block;
     private Dog dog;    
     private Jack jack;
@@ -17,8 +17,8 @@ public class MyWorld extends World {
         ladderY = new ArrayList<Integer>();
         
         setBackground("img/BG/BG.png");
-        cat = new Cat();
-        addObject(cat,400, 10);
+        axion = new Axion();
+        addObject(axion,400, 10);
         
      
         // dog = new Dog();
@@ -48,7 +48,7 @@ public class MyWorld extends World {
     }
     
     public void act(){
-        if (cat.getLives() == 0) {
+        if (axion.getLives() == 0) {
             MyMayflower.changeWorld(new YouLose());
         }
     }

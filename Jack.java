@@ -23,13 +23,13 @@ public class Jack extends AnimatedActor
     {
         super.act();
         World w = getWorld();
-        if(isTouching(Cat.class))
+        if(isTouching(Axion.class))
         {
-            Object a = getOneIntersectingObject(Cat.class);
-            Cat c = (Cat) a;
+            Object a = getOneIntersectingObject(Axion.class);
+            Axion c = (Axion) a;
             c.decreaseLives(1);
         }
-        else if (isTouching(Kunai.class)) {
+        else if (isTouching(Orb.class)) {
             w.removeObject(this);
         }
     }

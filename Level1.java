@@ -2,40 +2,56 @@ import mayflower.*;
 
 public class Level1 extends World
 {
-    private Cat cat;
-    private int level;
+    private Axion axion;
     private String[][] tiles;
-    private Jack jack;
-    private int screenIndex;
+    private Ghost ghost1;
     private Spike spike;
+    private Island island2;
+    private Ladder ladder;
+    private Island island1;
+    private Island island3;
+    private Ladder ladder1;
+    private Ladder ladder2;
 
     public Level1()
     {
-        setBackground("img/BG/BG.png");
-        screenIndex = 0;
-        cat = new Cat();
-        addObject(cat,400, 10);
-        
-        jack = new Jack();
-        addObject(jack, 80, 70);
+        setBackground("img/BG/level1.png");
+        axion = new Axion();
+        addObject(axion,20, 350);
+
+        island1 = new Island();
+        island2 = new Island();
+        island3 = new Island();
+        ghost1 = new Ghost();
+        addObject(ghost1, 355, 100);
+        addObject(island3, 350, 175);
+        addObject(island2, 500, 270);
+        addObject(island1, 200, 300);
         
         tiles = new String[6][8];
-        
+
+        ladder = new Ladder();
+        addObject(ladder, 150, 290);
+//        ladder1 = new Ladder();
+//        addObject(ladder1 , 360, 20);
+//        ladder2 = new Ladder();
+//        addObject(ladder2 , 220,170);
+
         initializeCourse();
         addYarn();
         buildWorld();
-        spike = new Spike();
-        addObject(spike, 450, 450);
+//        spike = new Spike();
+//        addObject(spike, 450, 450);
         
     }
     
     public void act()
     {
-        if (cat.getLives() == 0)
+        if (axion.getLives() == 0)
         {
             MyMayflower.changeWorld(new YouLose());
         }
-        if(cat.getY()-10 <= 0)
+        if(axion.getY()-10 <= 0)
         {
             MyMayflower.changeWorld(new Level2());
         }

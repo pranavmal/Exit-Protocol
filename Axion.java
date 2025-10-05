@@ -1,0 +1,172 @@
+import mayflower.*;
+import java.util.ArrayList;
+public class Axion extends MovableAnimatedActor
+{
+    private Animation walkRight;
+    private Animation walkLeft;
+    private Animation idleRight;
+    private Animation fallRight;
+    private Animation fallLeft;
+    private Animation idleLeft;
+    private String[] walkRightFrames;
+    private String[] idleLeftFrames;
+    private String[] fallRightFrames;
+    private String[] fallLeftFrames;
+    private String[] idleRightFrames;
+    private String[] walkLeftFrames;
+    private int x;
+    private static int score = 0;
+    private static int lives = 3;
+    private ArrayList<Heart> hearts;
+    private Timer climbTimer;
+    private Axion.Direction lastArrowKey;
+    private Orb o;
+    private int count;
+
+    public enum Direction
+    {
+        LEFT, RIGHT
+    }
+
+    public Axion()
+    {
+        x = 0;
+        if (MovableAnimatedActor.getDirection().equals("left")) {
+            lastArrowKey = Axion.Direction.LEFT;
+        }
+        else {
+            lastArrowKey = Axion.Direction.RIGHT;
+        }
+        hearts = new ArrayList<Heart>();
+        climbTimer = new Timer(1000000);
+        count = 0;
+        o = new Orb("right");
+        walkRightFrames = new String[8];
+        for( int i =0; i<8; i++)
+            walkRightFrames[i] = new String("img/axion/Run/Run_00" + i+ ".png");
+        walkRight = new Animation(walkRightFrames);
+        walkRight.scale(108,76);
+
+        walkLeftFrames = new String[8];
+        for(int i = 0; i < 8; i++)
+            walkLeftFrames[i] = new String("img/axion/Run/Run_00" + i + ".png");
+        walkLeft = new Animation(walkLeftFrames);
+        walkLeft.scale(108,76);
+        walkLeft.mirrorHorizontally();
+        
+        idleRightFrames = new String[7];
+        for(int i = 0; i < 7; i++)
+            idleRightFrames[i] = new String("img/axion/Idle/Idle_00" + i + ".png");
+        idleRight = new Animation(idleRightFrames);
+        idleRight.scale(96,84);
+
+        idleLeftFrames = new String[7];
+        for(int i = 0; i < 7; i++)
+            idleLeftFrames[i] = new String("img/axion/Idle/Idle_00" + i + ".png");
+        idleLeft = new Animation(idleLeftFrames);
+        idleLeft.scale(96,84);
+        idleLeft.mirrorHorizontally();
+
+        fallRightFrames = new String[4];
+        for(int i = 0; i < 4; i++)
+            fallRightFrames[i] = new String("img/axion/Fall/Fall_00" + i + ".png");
+        fallRight = new Animation(fallRightFrames);
+        fallRight.scale(104,76);
+
+        fallLeftFrames = new String[4];
+        for(int i = 0; i < 4; i++)
+        {
+            fallLeftFrames[i] = new String("img/axion/Fall/Fall_00" + i + ".png");
+        }
+        fallLeft = new Animation(fallLeftFrames);
+        fallLeft.scale(104,76);
+        fallLeft.mirrorHorizontally();
+        
+        setWalkRightAnimation(walkRight);
+        setIdleAnimation(idleRight);
+        setIdleLeftAni(idleLeft);
+        setFallingAnimation(fallRight);
+        setFallingLeft(fallLeft);
+        setWalkLeftAnimation(walkLeft);
+    }
+    public int getScore(){ return score;}
+    public int getLives(){return lives;}
+    private void updateText()
+    {
+        World w = getWorld();
+        w.removeText(10,30);
+        w.showText("Score: " + score + " lives: " + lives, 10, 30, Color.WHITE);
+        for (int j = hearts.size() - 1; j > 0; j--) {
+                w.removeObject(hearts.get(j));
+            }
+        for (int i = 0; i < lives; i++) {
+            
+            hearts.add(new Heart());
+            
+            w.addObject(hearts.get(i), 50*(i+1), 50);
+        }
+        
+    }
+    public void increaseScore(int amount)
+    {
+        score += amount;
+    }
+    public void decreaseLives(int amount1)
+    {
+        lives -= amount1;
+        setLocation(20,350);
+    }
+    
+    public void act()
+    {
+        super.act();
+        if (MovableAnimatedActor.getDirection().equals("left")) {
+            lastArrowKey = Axion.Direction.LEFT;
+        }
+        else {
+            lastArrowKey = Axion.Direction.RIGHT;
+        }
+        updateText();
+        World wo = getWorld();
+        
+        if(lives == 0)
+        {
+         wo.removeObject(this);
+         setLocation(400,300);
+        }
+
+        super.setTouchingLadder(isTouching(Ladder.class));
+        super.setTouchingLayerBlock(isTouching(LayerBlock.class));
+        
+        while (climbTimer.isDone() && isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+            climbTimer.reset();
+            setLocation(getX(), getY() - 1.1*getStep());
+        }
+        
+        if (isTouching(Spike.class)) {
+            decreaseLives(1);
+            setLocation(250, 70);
+        }
+        if (Mayflower.isKeyDown(Keyboard.KEY_SPACE)) {
+            if ((o.getX() > 800 || o.getX() < 0)) {
+                if (lastArrowKey == Axion.Direction.RIGHT) {
+                    wo.addObject(o.setDirection("right"), getX() + 90, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                else {
+                    wo.addObject(o.setDirection("left"), getX() - 15, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                count++;
+            }
+            else if (count == 0) {
+                if (lastArrowKey == Axion.Direction.RIGHT) {
+                    System.out.println((int) ((3.0/8)*getHeight()));
+                    wo.addObject(o.setDirection("right"), getX() + 90, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                else {
+                    wo.addObject(o.setDirection("left"), getX() - 15, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                count++;
+            }
+        }
+    }
+}

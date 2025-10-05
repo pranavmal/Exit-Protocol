@@ -14,10 +14,10 @@ public class Yarn extends Actor
     }
     public void act()
     {
-        if (isTouching(Cat.class))
+        if (isTouching(Axion.class))
         {
-            Object a = getOneIntersectingObject(Cat.class);
-            Cat c = (Cat) a;
+            Object a = getOneIntersectingObject(Axion.class);
+            Axion c = (Axion) a;
             World w = getWorld();
             w.removeObject(this);
             c.increaseScore(1);
