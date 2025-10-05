@@ -37,41 +37,10 @@ public class Level1 extends World
         }
         if(cat.getY()-10 <= 0)
         {
-            nextScreen();
-        }
-    }
-    public void nextScreen()
-    {
-        screenIndex++;
-        if(screenIndex == 1)
-        {
-            cat.setLocation(400,100);
-            jack.setLocation(100, 100);
-            spike.setLocation(450,450);
-            removeObject(spike);
-            addObject(spike, 350 , 250);
-            
-            addYarn();
-            buildWorld();
-            
-            
-        }
-        else if(screenIndex == 2)
-        {
-             cat.setLocation(400,200);
-            jack.setLocation(200,100);
-            spike.setLocation(450,450);
-            initializeCourse();
-            addYarn();
-            buildWorld();
-            level = 2;
-        }
-        else if(level == 2)
-        {
             MyMayflower.changeWorld(new Level2());
         }
-        
     }
+
     private void initializeCourse()
     {
         for(int i = 0; i < tiles.length; i++)

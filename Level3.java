@@ -41,34 +41,10 @@ public class Level3 extends World
         }
         if(cat.getY()-10 <= 0)
         {
-            nextScreen();
-        }
-    }
-    public void nextScreen()
-    {
-        screenIndex++;
-        if(screenIndex == 1)
-        {
-            cat.setLocation(400,100);
-            jack.setLocation(100, 100);
-            initializeCourse();
-            addYarn();
-            buildWorld();
-        }
-        else if(screenIndex == 2)
-        {
-             cat.setLocation(400,200);
-            jack.setLocation(200,100);
-            initializeCourse();
-            addYarn();
-            buildWorld();
-            level++;
-        }
-        else if(level == 1)
-        {
             MyMayflower.changeWorld(new YouWin());
         }
     }
+
     private void initializeCourse()
     {
         for(int i = 0; i < tiles.length; i++)

@@ -143,7 +143,7 @@ public class Cat extends MovableAnimatedActor
         if (Mayflower.isKeyDown(Keyboard.KEY_SPACE)) {
             System.out.println("SPACE");
             System.out.println(k.getX() > 800);
-            if ((k.getX() > 800) && (count > 0)) {
+            if ((k.getX() > 800 || k.getX() < 0) && (count > 0)) {
                 System.out.println("FIRE1");
                 if (lastArrowKey.equals("right")) {
                     wo.addObject(k.setDir("right"), getX() + 50, getY());
