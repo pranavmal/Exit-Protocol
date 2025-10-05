@@ -8,12 +8,16 @@ public class Axion extends MovableAnimatedActor
     private Animation fallRight;
     private Animation fallLeft;
     private Animation idleLeft;
+    private Animation climbing;
+    private Animation jumping;
     private String[] walkRightFrames;
     private String[] idleLeftFrames;
     private String[] fallRightFrames;
     private String[] fallLeftFrames;
     private String[] idleRightFrames;
     private String[] walkLeftFrames;
+    private String[] climbingFrames;
+    private String[] jumpingFrames;
     private int x;
     private static int score = 0;
     private static int lives = 3;
@@ -41,6 +45,19 @@ public class Axion extends MovableAnimatedActor
         climbTimer = new Timer(1000000);
         count = 0;
         o = new Orb("right");
+
+        climbingFrames = new String[3];
+        for( int i =0; i<3; i++)
+            climbingFrames[i] = new String("img/axion/Climb/Climb_00" + i+ ".png");
+        climbing = new Animation(climbingFrames);
+        climbing.scale(108,76);
+
+        jumpingFrames = new String[4];
+        for( int i =0; i<4; i++)
+            jumpingFrames[i] = new String("img/axion/Jump/Jump_00" + i+ ".png");
+        jumping = new Animation(jumpingFrames);
+        jumping.scale(108,76);
+
         walkRightFrames = new String[8];
         for( int i =0; i<8; i++)
             walkRightFrames[i] = new String("img/axion/Run/Run_00" + i+ ".png");
@@ -88,6 +105,7 @@ public class Axion extends MovableAnimatedActor
         setFallingAnimation(fallRight);
         setFallingLeft(fallLeft);
         setWalkLeftAnimation(walkLeft);
+        setJumpingAnimation(jumping);
     }
     public int getScore(){ return score;}
     public int getLives(){return lives;}
@@ -141,6 +159,8 @@ public class Axion extends MovableAnimatedActor
         while (climbTimer.isDone() && isTouching(Ladder.class) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
             climbTimer.reset();
             setLocation(getX(), getY() - 1.1*getStep());
+            setClimbingAnimation(climbing);
+            setAnimation(climbing);
         }
         
         if (isTouching(Spike.class)) {

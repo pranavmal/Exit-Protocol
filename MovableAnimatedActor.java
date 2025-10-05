@@ -8,6 +8,8 @@ public class MovableAnimatedActor extends AnimatedActor {
     private Animation idleLeft;
     private Animation falling;
     private Animation fleft;
+    private Animation climbing;
+    private Animation jumping;
     private String currentAction;
     private static String direction;
     private boolean isJumping;
@@ -28,6 +30,8 @@ public class MovableAnimatedActor extends AnimatedActor {
         idleRight = null;
         falling = null;
         fleft = null;
+        climbing = null;
+        jumping = null;
         currentAction = null;
         catTouchingLadder = false;
         upReleased = true;
@@ -60,6 +64,7 @@ public class MovableAnimatedActor extends AnimatedActor {
             isJumping = true;
         }
         else if (isJumping && jumpLeft > 0) {
+            newAction = "jumping";
             if (!isBlocked() && Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && getX() + getWidth() < 800)
                 setLocation(getX() + 2, getY() - 10);
             else if (!isBlocked() && Mayflower.isKeyDown(Keyboard.KEY_LEFT) && getX() > 0)
@@ -116,6 +121,10 @@ public class MovableAnimatedActor extends AnimatedActor {
                 setAnimation(fleft);
             if (newAction.equals("idleLeft"))
                 setAnimation(idleLeft);
+            if (newAction.equals("climbing"))
+                setAnimation(climbing);
+            if (newAction.equals("jumping"))
+                setAnimation(jumping);
             currentAction = newAction;
         }
 
@@ -144,6 +153,14 @@ public class MovableAnimatedActor extends AnimatedActor {
 
     public void setFallingLeft(Animation ani) {
         fleft = ani;
+    }
+
+    public void setClimbingAnimation(Animation ani) {
+        climbing = ani;
+    }
+
+    public void setJumpingAnimation(Animation ani) {
+        jumping = ani;
     }
 
     public void setAnimation(Animation a) {
