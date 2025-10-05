@@ -22,12 +22,15 @@ public class Jack extends AnimatedActor
     public void act()
     {
         super.act();
+        World w = getWorld();
         if(isTouching(Cat.class))
         {
             Object a = getOneIntersectingObject(Cat.class);
             Cat c = (Cat) a;
-            World w = getWorld();
             c.decreaseLives(1);
+        }
+        else if (isTouching(Kunai.class)) {
+            w.removeObject(this);
         }
     }
 }

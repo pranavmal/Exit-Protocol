@@ -9,7 +9,7 @@ public class MovableAnimatedActor extends AnimatedActor{
     private Animation falling;
     private Animation fleft;
     private String currentAction;
-    private String direction;
+    private static String direction;
     private boolean isFalling;
     private boolean isJumping;
     private boolean isBlocking;
@@ -33,8 +33,8 @@ public class MovableAnimatedActor extends AnimatedActor{
         catTouchingLadder = value;
     }
     
-    public void doSomething(int x, int y) {
-        setLocation(x, y);
+    public static String getDirection() {
+        return direction;
     }
     
     public void act(){
@@ -57,7 +57,7 @@ public class MovableAnimatedActor extends AnimatedActor{
                     if (getY()-(int)1.1*getStep() > 0 && !catTouchingLadder) {
                         int x = getX();
                         int y = getY();
-                        doSomething(x, y - (int) 1.1*getStep());
+                        setLocation(x, y - (int) 1.1*getStep());
                         
                         if (isTouching(LayerBlock.class)) {
                             setLocation(x, y + (int) 1.1*getStep());

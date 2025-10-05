@@ -19,14 +19,20 @@ public class Cat extends MovableAnimatedActor
     private int lives;
     private ArrayList<Heart> hearts;
     private Timer climbTimer;
+    private String lastArrowKey;
+    private Kunai k;
+    private int count;
     public Cat() 
     {
         x = 0;
+        lastArrowKey = MovableAnimatedActor.getDirection();
         hearts = new ArrayList<Heart>();
         climbTimer = new Timer(1000000);
         score = 0;
         lives = 3;
+        count = 0;
         walkRightFrames = new String[10];
+        k = new Kunai("right");
         for( int i =0; i<10; i++)
             walkRightFrames[i] = new String("img/cat/Walk (" + (i+1)+ ").png");
         walkRight = new Animation(walkRightFrames);
@@ -109,6 +115,7 @@ public class Cat extends MovableAnimatedActor
     public void act()
     {
         super.act();
+        lastArrowKey = MovableAnimatedActor.getDirection();
         updateText();
         World wo = getWorld();
         
@@ -131,6 +138,33 @@ public class Cat extends MovableAnimatedActor
         if (isTouching(Spike.class)) {
             decreaseLives(1);
             setLocation(250, 70);
+        }
+        System.out.println(k.getX());
+        if (Mayflower.isKeyDown(Keyboard.KEY_SPACE)) {
+            System.out.println("SPACE");
+            System.out.println(k.getX() > 800);
+            if ((k.getX() > 800) && (count > 0)) {
+                System.out.println("FIRE1");
+                if (lastArrowKey.equals("right")) {
+                    wo.addObject(k.setDir("right"), getX() + 50, getY());
+                }
+                else {
+                    wo.addObject(k.setDir("left"), getX() - 50, getY());
+                }
+                count++;
+            }
+            else if (count == 0) {
+                System.out.println("FIRE");
+                if (lastArrowKey.equals("right")) {
+                    System.out.println((int) ((3.0/8)*getHeight()));
+                    wo.addObject(k.setDir("right"), getX() + 50, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                else {
+                    wo.addObject(k.setDir("left"), getX() - 50, getY()+ (int) ((3.0/8)*getHeight()));
+                }
+                count++;
+            }
+            else {}
         }
     }
 }
