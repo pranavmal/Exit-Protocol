@@ -218,8 +218,8 @@ public class Axion extends MovableAnimatedActor
     private Axion.Direction lastArrowKey;
     private final Orb o;
     private int count;
-    private static Timer stopwatch;
-    private static  int stopTime;
+    private static Timer stopwatch = new Timer(1000);
+    private static  int stopTime = 0;
 
     public enum Direction
     {
@@ -238,8 +238,6 @@ public class Axion extends MovableAnimatedActor
         hearts = new ArrayList<Heart>();
         climbTimer = new Timer(1000000);
         count = 0;
-        stopwatch = new Timer(1000);
-        stopTime = 0;
         o = new Orb("right");
 
         // Add image path files to a string and create animation object
