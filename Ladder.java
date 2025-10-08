@@ -6,7 +6,7 @@ public class Ladder extends Actor
     public Ladder()
     {
         
-        setImage("img/Object/Ladder1.png");
+        setImage("img/Object/Ladder.png");
         
     }
 
