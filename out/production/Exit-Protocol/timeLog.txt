@@ -1,0 +1,8 @@
+bob: 26 18
+sid: 20 05
+dan: 22 06
+lori: 22 26
+john: 25 41
+riley: 22 32
+pam: 22 33
+jack: 31 46

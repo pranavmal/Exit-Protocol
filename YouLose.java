@@ -9,5 +9,8 @@ public class YouLose extends World
     }
     
     public void act() {
+        if (Mayflower.isKeyDown(Keyboard.KEY_SPACE)) {
+            MyMayflower.changeWorld(new Leaderboard());
+        }
     }
 }

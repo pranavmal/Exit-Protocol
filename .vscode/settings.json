@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/mayflower3.3.7.jar",
+        "/home/user/potatoe1/School/Round Rock/Junior/CS3/mayflower.jar"
+    ],
+    "java.project.sourcePaths": [
+        "."
+    ]
+}

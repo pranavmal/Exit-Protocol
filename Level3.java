@@ -1,5 +1,9 @@
 import mayflower.*;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Level3 extends World {
     private final Axion axion;
     private final String[][] tiles;
@@ -27,8 +31,31 @@ public class Level3 extends World {
             MyMayflower.changeWorld(new YouLose());
         }
         if (axion.getY() - 10 <= 0) {
-            MyMayflower.changeWorld(new YouWin());
+            try {
+                saveTime();
+                MyMayflower.changeWorld(new YouWin());
+            } catch (IOException e) {
+                System.out.println("Failed to save time: " + e.getMessage());
+            }
         }
+    }
+
+    public void saveTime() throws IOException {
+//        try {
+        // Get player's name and add their time to the text file
+        Path filePath = Path.of("timeLog.txt");
+        String fileContent = Files.readString(filePath);
+        String[] lines = fileContent.split("\n");
+        String time = StartScreen.name + ": " + String.format("%02d", Axion.stopTime / 60) + " " + String.format("%02d", Axion.stopTime % 60);
+//            Files.writeString(filePath, time + "\n", java.nio.file.StandardOpenOption.APPEND);
+        FileWriter writer = new FileWriter("timeLog.txt", true);
+        writer.write(time + "\n");
+        writer.close();
+//            System.out.println("Time saved: " + time);
+//        }
+//        catch (IOException e) {
+//            System.out.println("An error occurred while reading or writing the file: " + e.getMessage());
+//        }
     }
 
     // Set 2D array to empty string and add ground tiles

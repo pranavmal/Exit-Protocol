@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Level1
+comment1.params=
+comment1.target=Level1()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ nextScreen()
+comment4.params=
+comment4.target=void\ initializeCourse()
+comment5.params=
+comment5.target=void\ addYarn()
+comment6.params=
+comment6.target=void\ buildWorld()
+numComments=7
