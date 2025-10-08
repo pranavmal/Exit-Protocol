@@ -1,7 +1,7 @@
 import mayflower.*;
 
 public class AnimatedActor extends GravityActor {
-    private Timer time;
+    private final Timer time;
     private Animation animation;
 
     public AnimatedActor() {
@@ -12,6 +12,7 @@ public class AnimatedActor extends GravityActor {
         animation = a;
     }
 
+    // When timer is over get and set the next frame
     public void act() {
         if (time.isDone()) {
             time.reset();

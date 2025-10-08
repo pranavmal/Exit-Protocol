@@ -2,21 +2,26 @@ import mayflower.*;
 
 public class GravityActor extends Actor
 {
-    private int step;
-    private boolean catTouchingLayerBlock;
+    private final int step;
+    private boolean axionTouchingLayerBlock;
+
+    // Set gravity and ladder climb speed rate
     public GravityActor()
     {
         step = 2;
     }
 
+    // Set constructor value if Axion is touching the ground
     public void setTouchingLayerBlock(boolean value) {
-        catTouchingLayerBlock = value;
+        axionTouchingLayerBlock = value;
     }
 
+    // Get constructor the value if Axion is touching the ground
     public boolean getTouchingLayerBlock() {
-        return catTouchingLayerBlock;
+        return axionTouchingLayerBlock;
     }
 
+    // Increased y position of player until player is blocked when there is no gravity acting on them
     public void act()
     {
         setLocation(getX(),getY()+step);
@@ -30,15 +35,13 @@ public class GravityActor extends Actor
         return step;
     }
 
+    // Actor is blocked if they are touching a block, layer block, or island
     public boolean isBlocked()
     {
-        if(isTouching(Block.class) || isTouching(LayerBlock.class) || isTouching(Island.class))
-        {
-            return true;
-        }
-        return false;
+        return isTouching(Block.class) || isTouching(LayerBlock.class) || isTouching(Island.class);
     }
 
+    // Actor is falling if they are not touching a block, layer block, or island on the below step
     public boolean isFalling()
     {
         boolean ret;

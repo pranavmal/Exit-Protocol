@@ -1,20 +1,21 @@
 import mayflower.*;
 
 public class Ghost extends AnimatedActor {
-    private String[] frames;
-    private Animation hover;
+    private final String[] frames;
+    private final Animation hover;
 
     public Ghost() {
         frames = new String[3];
         for( int i =0; i<3; i++)
         {
-            frames[i] = new String("img/ghost/ghost_00" + i + ".png");
+            frames[i] = "img/ghost/ghost_00" + i + ".png";
         }
         hover = new Animation(frames);
         setAnimation(hover);
         hover.scale(60,52);
     }
 
+    // Decrease Axion's lives if touching him, remove self if touching Orb
     public void act() {
         super.act();
         World w = getWorld();
@@ -26,9 +27,6 @@ public class Ghost extends AnimatedActor {
         }
         else if (isTouching(Orb.class)) {
             w.removeObject(this);
-            Object o = getOneIntersectingObject(Orb.class);
-            Orb orb = (Orb) o;
-            w.removeObject(orb);
         }
     }
 }

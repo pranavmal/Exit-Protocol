@@ -1,17 +1,13 @@
 
-/**
- * Write a description of class Yarn here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 import mayflower.*;
-public class Yarn extends Actor
+public class Gem extends Actor
 {
-    public Yarn()
+    public Gem()
     {
-        setImage("img/yarn.png");
+        setImage("img/Gem.png");
     }
+
+    // Increase Axion's score by 1 when touched and remove the gem from the world
     public void act()
     {
         if (isTouching(Axion.class))

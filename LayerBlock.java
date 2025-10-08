@@ -1,6 +1,6 @@
 
 import mayflower.*;
- 
+
 public class LayerBlock extends Actor
 {
 
@@ -11,6 +11,6 @@ public class LayerBlock extends Actor
 
     public void act()
     {
-        
+
     }
 }
