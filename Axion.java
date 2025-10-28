@@ -27,7 +27,7 @@ public class Axion extends MovableAnimatedActor
     private Axion.Direction lastArrowKey;
     private final Orb o;
     private int count;
-    private static Timer stopwatch = new Timer(1000);
+    private static final Timer stopwatch = new Timer(1000);
     public static  int stopTime = 0;
 
     public enum Direction

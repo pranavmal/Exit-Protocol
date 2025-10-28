@@ -7,3 +7,4 @@ riley: 22 32
 pam: 22 33
 jack: 31 46
 westin: 24 16
+goggin: 24 52
